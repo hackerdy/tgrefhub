@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useContext } from 'react';
 import UserContext from '../utils/UserContext';
-import { Card, CardContent } from './Card';
+import { Card, CardContent } from './card';
 import axios from 'axios';
 
 export default function ReferralInfo() {
