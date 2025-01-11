@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node backend/server.js",
+    "start": "cross-env NODE_ENV=production node backend/server.js node backend/bot.js",
     "bot": "node backend/bot.js",
     "dev": "nodemon backend/server.js",
     "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",

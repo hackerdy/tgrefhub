@@ -1,4 +1,4 @@
-import { Bot } from "grammy";
+import { Bot, InlineKeyboard } from 'grammy';
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -8,16 +8,16 @@ const bot = new Bot(process.env.BOT_TOKEN);
 // Map is used for simplicity. For production use a database
 const paidUsers = new Map();
 
-bot.command("start", (ctx) =>
-  ctx.reply(
-    `Welcome! I am a simple bot that can accept payments via Telegram Stars. The following commands are available:
+bot.command('start', async (ctx) => {
+  const keyboard = new InlineKeyboard()
+    .url('Join Telegram Channel', 'https://t.me/tgrefhub')
+    .row()
+    .url('Follow on Twitter', 'https://x.com/tgrefhub_backup?t=EiuoNyRQux7w1t7uMpAviQ&s=09');
 
-/pay - to pay
-/status - to check payment status
-/refund - to refund payment`,
-  ),
-);
-
+  await ctx.reply('Welcome! Please join our Telegram channel and follow us on Twitter:', {
+    reply_markup: keyboard,
+  });
+});
 
 bot.command("pay", (ctx) =>
   ctx.reply(

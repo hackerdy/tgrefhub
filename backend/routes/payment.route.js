@@ -1,8 +1,9 @@
 import express from 'express';
+import { Bot } from 'grammy';
 import cors from 'cors';
 import paidUsers from '../models/paidUsers.model.js';
 import User from '../models/user.model.js';
-import { Bot, InlineKeyboard } from 'grammy';
+
 
 
 const bot = new Bot(process.env.BOT_TOKEN);
@@ -74,18 +75,6 @@ bot.on("message", async (ctx) => {
 });
 
 
-bot.command('start', async (ctx) => {
-  const keyboard = new InlineKeyboard()
-    .url('Join Telegram Channel', 'https://t.me/tgrefhub')
-    .row()
-    .url('Follow on Twitter', 'https://x.com/tgrefhub_backup?t=EiuoNyRQux7w1t7uMpAviQ&s=09');
-
-  await ctx.reply('Welcome! Please join our Telegram channel and follow us on Twitter:', {
-    reply_markup: keyboard,
-  });
-});
-
 bot.start();
 
 export default router;
-
