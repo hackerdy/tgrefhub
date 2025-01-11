@@ -50,7 +50,7 @@ export function JoinedAirdropCards() {
 
       {/* Grid of Airdrop Cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {listings.map((listing, index) => (
+        {listings.map((listing) => (
           <div key={listing._id} className="bg-[#242f3d] rounded-xl p-4 shadow-lg">
             <div className="flex justify-between items-center mb-4">
               <h3 className="font-medium text-white">{listing.listing?.title || 'Untitled Airdrop'}</h3>
