@@ -88,5 +88,3 @@ bot.command('start', async (ctx) => {
 //     })
 //     .catch(() => ctx.reply("Refund failed"));
 // });
-
-bot.start();
