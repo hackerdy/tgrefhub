@@ -8,11 +8,25 @@ import User from '../models/user.model.js';
 const bot = new Bot(process.env.BOT_TOKEN);
 const router = express.Router();
 
+bot.on("my_chat_member", async (ctx) => {
+  if (ctx.myChatMember.new_chat_member.status === "member") {
+    const keyboard = new InlineKeyboard()
+      .url('Join Telegram Channel', 'https://t.me/tgrefhub')
+      .row()
+      .url('Follow on Twitter', 'https://x.com/tgrefhub_backup');
+
+    await ctx.reply('Welcome to Telegram Referral Hub! Please join our channel and follow us:', {
+      reply_markup: keyboard,
+    });
+  }
+});
+
+
 bot.command('start', async (ctx) => {
   const keyboard = new InlineKeyboard()
     .url('Join Telegram Channel', 'https://t.me/tgrefhub')
     .row()
-    .url('Follow on Twitter', 'https://x.com/tgrefhub_backup?t=EiuoNyRQux7w1t7uMpAviQ&s=09');
+    .url('Follow on Twitter', 'https://x.com/tgrefhub_backup');
 
   await ctx.reply('Welcome! Please join our Telegram channel and follow us on Twitter:', {
     reply_markup: keyboard,
