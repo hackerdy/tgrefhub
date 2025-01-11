@@ -26,11 +26,11 @@ bot.on("my_chat_member", async (ctx) => {
 
 bot.command('start', async (ctx) => {
   const keyboard = new InlineKeyboard()
-    .url('Join Telegram Channel', 'https://t.me/tgrefhub')
+    .url('Open Mini App', 'https://t.me/tgrefhub_bot/Tgrefhub')
     .row()
     .url('Follow on Twitter', 'https://x.com/tgrefhub_backup')
     .row()
-    .url('Open Mini App', 'https://t.me/tgrefhub_bot/Tgrefhub');
+    .url('Join Telegram Channel', 'https://t.me/tgrefhub');
 
   await ctx.reply('Welcome! Please join our Telegram channel and follow us on Twitter:', {
     reply_markup: keyboard,
