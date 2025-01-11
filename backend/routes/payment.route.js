@@ -1,5 +1,4 @@
 import express from 'express';
-import { Bot } from 'grammy';
 import cors from 'cors';
 import paidUsers from '../models/paidUsers.model.js';
 import User from '../models/user.model.js';
