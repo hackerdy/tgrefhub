@@ -11,11 +11,11 @@ const router = express.Router();
 bot.on("my_chat_member", async (ctx) => {
   if (ctx.myChatMember.new_chat_member.status === "member") {
     const keyboard = new InlineKeyboard()
-      .url('Join Telegram Channel', 'https://t.me/tgrefhub')
-      .row()
-      .url('Follow on Twitter', 'https://x.com/tgrefhub_backup')
-      .row()
-      .webApp('Open Mini App', 'https://t.me/tgrefhub_bot/Tgrefhub');
+    .url('Open Mini App', 'https://t.me/tgrefhub_bot/Tgrefhub')
+    .row()
+    .url('Follow on Twitter', 'https://x.com/tgrefhub_backup')
+    .row()
+    .url('Join Telegram Channel', 'https://t.me/tgrefhub');
 
     await ctx.reply('Welcome to Telegram Referral Hub! Please join our channel and follow us:', {
       reply_markup: keyboard,
