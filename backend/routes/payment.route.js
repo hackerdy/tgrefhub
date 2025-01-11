@@ -1,36 +1,24 @@
 import express from 'express';
-import { Bot } from 'grammy';
+import { Bot, InlineKeyboard } from 'grammy';
 import cors from 'cors';
 import paidUsers from '../models/paidUsers.model.js';
 import User from '../models/user.model.js';
 
 
-
 const bot = new Bot(process.env.BOT_TOKEN);
 const router = express.Router();
 
-router.post('/', async (req, res) => {
-  const { amount } = req.body;
-  if (!amount || amount <= 0) {
-    return res.status(400).json({ error: 'Invalid amount' });
-  }
+bot.command('start', async (ctx) => {
+  const keyboard = new InlineKeyboard()
+    .url('Join Telegram Channel', 'https://t.me/tgrefhub')
+    .row()
+    .url('Follow on Twitter', 'https://x.com/tgrefhub_backup?t=EiuoNyRQux7w1t7uMpAviQ&s=09');
 
-  try {
-    const invoice = await bot.api.createInvoiceLink(
-      `Top up ${amount} points`, // title
-      `Add ${amount} points to your account`, // description
-      "{}", // payload
-      "", // provider_token (empty for Telegram Stars)
-      "XTR", // currency
-      [{ label: `${amount} points`, amount: amount * 1 }] // prices
-    );
-
-    res.json({ payment_url: invoice });
-  } catch (error) { 
-    console.error('Error creating invoice:', error);
-    res.status(500).json({ error: 'Failed to create invoice' });
-  }
+  await ctx.reply('Welcome! Please join our Telegram channel and follow us on Twitter:', {
+    reply_markup: keyboard,
+  });
 });
+
 
 // Telegram bot handling
 bot.on('pre_checkout_query', async (ctx) => {
@@ -75,6 +63,31 @@ bot.on("message", async (ctx) => {
 });
 
 
+// Start the bot
 bot.start();
+
+router.post('/', async (req, res) => {
+  const { amount } = req.body;
+  if (!amount || amount <= 0) {
+    return res.status(400).json({ error: 'Invalid amount' });
+  }
+
+  try {
+    const invoice = await bot.api.createInvoiceLink(
+      `Top up ${amount} points`, // title
+      `Add ${amount} points to your account`, // description
+      "{}", // payload
+      "", // provider_token (empty for Telegram Stars)
+      "XTR", // currency
+      [{ label: `${amount} points`, amount: amount * 0.01 }] // prices
+    );
+
+    res.json({ payment_url: invoice });
+  } catch (error) {
+    console.error('Error creating invoice:', error);
+    res.status(500).json({ error: 'Failed to create invoice' });
+  }
+});
+
 
 export default router;
