@@ -13,7 +13,9 @@ bot.on("my_chat_member", async (ctx) => {
     const keyboard = new InlineKeyboard()
       .url('Join Telegram Channel', 'https://t.me/tgrefhub')
       .row()
-      .url('Follow on Twitter', 'https://x.com/tgrefhub_backup');
+      .url('Follow on Twitter', 'https://x.com/tgrefhub_backup')
+      .row()
+      .webApp('Open Mini App', 'https://t.me/tgrefhub_bot/Tgrefhub');
 
     await ctx.reply('Welcome to Telegram Referral Hub! Please join our channel and follow us:', {
       reply_markup: keyboard,
@@ -26,7 +28,9 @@ bot.command('start', async (ctx) => {
   const keyboard = new InlineKeyboard()
     .url('Join Telegram Channel', 'https://t.me/tgrefhub')
     .row()
-    .url('Follow on Twitter', 'https://x.com/tgrefhub_backup');
+    .url('Follow on Twitter', 'https://x.com/tgrefhub_backup')
+    .row()
+    .webApp('Open Mini App', 'https://t.me/tgrefhub_bot/Tgrefhub');
 
   await ctx.reply('Welcome! Please join our Telegram channel and follow us on Twitter:', {
     reply_markup: keyboard,
