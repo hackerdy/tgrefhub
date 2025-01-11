@@ -93,7 +93,7 @@ console.log(`Auth age: ${authAge} seconds`);
       user: {
         telegramId: user.telegramId,
         premium: user.premium,
-        points: user.points,
+        points: user.points.toFixed(2),
         firstName: userObj.first_name,
         lastName: userObj.last_name,
         username: userObj.username,
