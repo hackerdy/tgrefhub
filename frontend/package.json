@@ -17,6 +17,7 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@radix-ui/react-alert-dialog": "^1.1.4",
     "@radix-ui/react-label": "^2.1.1",
+    "@tonsolutions/telemetree-react": "^1.2.6",
     "@twa-dev/sdk": "^8.0.1",
     "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
