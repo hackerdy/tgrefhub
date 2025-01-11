@@ -30,7 +30,7 @@ bot.command('start', async (ctx) => {
     .row()
     .url('Follow on Twitter', 'https://x.com/tgrefhub_backup')
     .row()
-    .webApp('Open Mini App', 'https://t.me/tgrefhub_bot/Tgrefhub');
+    .url('Open Mini App', 'https://t.me/tgrefhub_bot/Tgrefhub');
 
   await ctx.reply('Welcome! Please join our Telegram channel and follow us on Twitter:', {
     reply_markup: keyboard,
