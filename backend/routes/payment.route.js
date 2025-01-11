@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
     );
 
     res.json({ payment_url: invoice });
-  } catch (error) {
+  } catch (error) { 
     console.error('Error creating invoice:', error);
     res.status(500).json({ error: 'Failed to create invoice' });
   }
