@@ -73,6 +73,17 @@ bot.on("message", async (ctx) => {
     
       // Notify the user
       await ctx.reply(`Payment of ${amount} XTR successful! Thank you for your purchase.`);
+      const keyboard = new InlineKeyboard()
+      .url('Open Mini App', 'https://t.me/tgrefhub_bot/Tgrefhub')
+      .row()
+      .url('Follow on Twitter', 'https://x.com/tgrefhub_backup')
+      .row()
+      .url('Join Telegram Channel', 'https://t.me/tgrefhub');  
+
+  await ctx.reply('Welcome to Telegram Referral Hub! Please join our channel and follow us:', {
+    reply_markup: keyboard,
+  });
+
     } catch (error) {
       console.error('Error saving payment:', error);
       await ctx.reply('Payment received, but there was an error updating our records. Please contact support.');
