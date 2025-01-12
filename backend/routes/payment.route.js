@@ -23,21 +23,21 @@ bot.on("my_chat_member", async (ctx) => {
   }
 });
 
-bot.on("message", async (ctx) => {
-  // Skip if it's a payment message
-  if (!ctx.message.successful_payment) {
-    const keyboard = new InlineKeyboard()
-      .url('Open Mini App', 'https://t.me/tgrefhub_bot/Tgrefhub')
-      .row()
-      .url('Follow on Twitter', 'https://x.com/tgrefhub_backup')
-      .row()
-      .url('Join Telegram Channel', 'https://t.me/tgrefhub');
+// bot.on("message", async (ctx) => {
+//   // Skip if it's a payment message
+//   if (!ctx.message.successful_payment) {
+//     const keyboard = new InlineKeyboard()
+//       .url('Open Mini App', 'https://t.me/tgrefhub_bot/Tgrefhub')
+//       .row()
+//       .url('Follow on Twitter', 'https://x.com/tgrefhub_backup')
+//       .row()
+//       .url('Join Telegram Channel', 'https://t.me/tgrefhub');
 
-    await ctx.reply('Welcome to Telegram Referral Hub! Please join our channel and follow us:', {
-      reply_markup: keyboard,
-    });
-  }
-});
+//     await ctx.reply('Welcome to Telegram Referral Hub! Please join our channel and follow us:', {
+//       reply_markup: keyboard,
+//     });
+//   }
+// });
 
 bot.command('start', async (ctx) => {
   const keyboard = new InlineKeyboard()
