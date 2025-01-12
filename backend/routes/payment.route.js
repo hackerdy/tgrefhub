@@ -97,7 +97,7 @@ router.post('/', async (req, res) => {
       "{}", // payload
       "", // provider_token (empty for Telegram Stars)
       "XTR", // currency
-      [{ label: `${amount} points`, amount: amount * 0.01 }] // prices
+      [{ label: `${amount} points`, amount: amount * 0.5 }] // prices
     );
 
     res.json({ payment_url: invoice });
