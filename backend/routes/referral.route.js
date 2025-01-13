@@ -70,7 +70,8 @@ router.post('/record-referral', async (req, res) => {
     if (referredUser.referrer) {
       await session.abortTransaction();
       session.endSession();
-      return res.status(400).json({ message: 'User has already been referred by another user' });
+      // Instead of returning an error, we'll return a message indicating the user already has a referrer
+      return res.status(200).json({ message: 'User already has a referrer', alreadyReferred: true });
     }
 
     // Check if a referral already exists between the referrer and referred user
@@ -82,7 +83,8 @@ router.post('/record-referral', async (req, res) => {
     if (existingReferral) {
       await session.abortTransaction();
       session.endSession();
-      return res.status(400).json({ message: 'Referral already exists' });
+      // Instead of returning an error, we'll return a message indicating the referral already exists
+      return res.status(200).json({ message: 'Referral already exists', alreadyReferred: true });
     }
 
     // Create a new referral record
@@ -119,6 +121,8 @@ router.post('/record-referral', async (req, res) => {
     res.status(500).json({ message: 'Error recording referral', error: error.message });
   }
 });
+
+
 
 
 // Get referral stats for a user

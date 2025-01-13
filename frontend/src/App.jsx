@@ -37,33 +37,43 @@ const App = () => {
       console.log("Init Data:", initData);
       console.log("Init Data Unsafe:", initDataUnsafe);
 
-      if (initData && initDataUnsafe.user) {
-        try {
-          const response = await axios.post(`${API_BASE_URL}/user/validate-telegram-data`, { initData });
-          const userData = response.data.user;
-          console.log('User Data:', userData);
+     
+  if (initData && initDataUnsafe.user) {
+    try {
+      const response = await axios.post(`${API_BASE_URL}/user/validate-telegram-data`, { initData });
+      const userData = response.data.user;
+      console.log('User Data:', userData);
 
-          setUserData(userData);
+      setUserData(userData);
 
-          if (referralCode) {
-            console.log('Recording referral...');
-            const referrerResponse = await axios.post(`${API_BASE_URL}/referrals/record-referral`, { 
-              referralCode, 
-              newUserTelegramId: userData.telegramId 
-            });
-            console.log('Referral recorded:', referrerResponse.data);
-          }
-        } catch (error) {
-          console.error('API Error:', error.response?.data || error.message);
-          setError(error.response?.data?.error || "Error validating Telegram data.");
+      if (referralCode) {
+        console.log('Recording referral...');
+        const referrerResponse = await axios.post(`${API_BASE_URL}/referrals/record-referral`, { 
+          referralCode, 
+          newUserTelegramId: userData.telegramId 
+        });
+        console.log('Referral response:', referrerResponse.data);
+        
+        if (referrerResponse.data.alreadyReferred) {
+          console.log('User already referred or referral exists');
+          // You can handle this case as needed, e.g., show a message to the user
+        } else {
+          console.log('Referral recorded successfully');
+          // Handle successful referral, e.g., update UI or show a success message
         }
-      } else {
-        console.error("This app must be run within Telegram.");
-        setError("This app must be run within Telegram.");
       }
+    } catch (error) {
+      console.error('API Error:', error.response?.data || error.message);
+      setError(error.response?.data?.error || "Error validating Telegram data.");
+    }
+  } else {
+    console.error("This app must be run within Telegram.");
+    setError("This app must be run within Telegram.");
+  }
 
-      setLoading(false);
-    };
+  setLoading(false);
+};
+
 
     initializeTelegram();
   }, [API_BASE_URL, setUserData]);
