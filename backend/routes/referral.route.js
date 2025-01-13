@@ -46,21 +46,30 @@ router.post('/record-referral', async (req, res) => {
 
   try {
     const { referralCode, newUserTelegramId } = req.body;
+    console.log('Received request:', { referralCode, newUserTelegramId });
 
     // Find the referrer by referral code
     const referrer = await User.findOne({ referralCode });
+    console.log('Referrer found:', referrer);
     if (!referrer) {
+      await session.abortTransaction();
+      session.endSession();
       return res.status(404).json({ message: 'Invalid referral code' });
     }
 
     // Find the referred user by their Telegram ID
     const referredUser = await User.findOne({ telegramId: newUserTelegramId });
+    console.log('Referred user found:', referredUser);
     if (!referredUser) {
+      await session.abortTransaction();
+      session.endSession();
       return res.status(404).json({ message: 'Referred user not found' });
     }
 
     // Check if the referred user already has a referrer
     if (referredUser.referrer) {
+      await session.abortTransaction();
+      session.endSession();
       return res.status(400).json({ message: 'User has already been referred by another user' });
     }
 
@@ -69,7 +78,10 @@ router.post('/record-referral', async (req, res) => {
       referrer: referrer._id,
       referred: referredUser._id
     });
+    console.log('Existing referral:', existingReferral);
     if (existingReferral) {
+      await session.abortTransaction();
+      session.endSession();
       return res.status(400).json({ message: 'Referral already exists' });
     }
 
@@ -82,15 +94,18 @@ router.post('/record-referral', async (req, res) => {
       completedAt: new Date()
     });
     await newReferral.save({ session });
+    console.log('New referral created:', newReferral);
 
     // Update referrer's points and referrals
     referrer.points += 3;
     referrer.referrals.push(referredUser._id);
     await referrer.save({ session });
+    console.log('Referrer updated:', referrer);
 
     // Update referred user's referrer
     referredUser.referrer = referrer._id;
     await referredUser.save({ session });
+    console.log('Referred user updated:', referredUser);
 
     // Commit the transaction
     await session.commitTransaction();
@@ -104,6 +119,7 @@ router.post('/record-referral', async (req, res) => {
     res.status(500).json({ message: 'Error recording referral', error: error.message });
   }
 });
+
 
 // Get referral stats for a user
 router.post('/stats', async (req, res) => {
