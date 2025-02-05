@@ -1,5 +1,5 @@
 import { useState } from 'react';
-// Removed dotenv import and config as it's handled by dotenv-webpack
+
 import { TwaAnalyticsProvider } from '@tonsolutions/telemetree-react';
 import UserContext from './utils/UserContext';
 import App from './App.jsx';

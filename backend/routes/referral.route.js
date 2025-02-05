@@ -32,7 +32,7 @@ router.post('/generate-link', async (req, res) => {
     }
 
     // Return the referral link
-    res.json({ referralLink: `https://t.me/tgrefhub_bot/Tgrefhub?start=${referralCode}` });
+    res.json({ referralLink: `https://t.me/tgrefhub_bot/Tgrefhub?startapp=${referralCode}` });
   } catch (error) {
     console.error('Error generating referral link:', error);
     res.status(500).json({ message: 'Error generating referral link', error: error.message });

@@ -34,15 +34,14 @@ const App = () => {
       const urlParams = new URLSearchParams(window.location.search);
       const referralCode = urlParams.get("tgWebAppStartParam") || urlParams.get("start");
       console.log("Referral Code:", referralCode);
-      console.log("Init Data:", initData);
-      console.log("Init Data Unsafe:", initDataUnsafe);
+
 
      
   if (initData && initDataUnsafe.user) {
     try {
       const response = await axios.post(`${API_BASE_URL}/user/validate-telegram-data`, { initData });
       const userData = response.data.user;
-      console.log('User Data:', userData);
+
 
       setUserData(userData);
 
